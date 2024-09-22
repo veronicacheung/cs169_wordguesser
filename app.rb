@@ -45,11 +45,11 @@ class WordGuesserApp < Sinatra::Base
 	    redirect '/show'
     elsif @game.guesses.include?(letter.downcase) || @game.wrong_guesses.include?(letter.downcase)
 	    flash[:message] = "You have already used that letter."
+	    redirect '/show'
     else 
 	    @game.guess(letter)
+	    redirect '/show'
     end
-
-    redirect '/show'
   end
   
   # Everytime a guess is made, we should eventually end up at this route.
