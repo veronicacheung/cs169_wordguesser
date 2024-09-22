@@ -24,7 +24,6 @@ class WordGuesserGame
     else
       @wrong_guesses += letter
     end
-    word_with_guesses()
     return true
   end
 
