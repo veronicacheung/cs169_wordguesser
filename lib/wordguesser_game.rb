@@ -13,7 +13,7 @@ class WordGuesserGame
   end
 
   def guess(letter)
-    raise ArgumentError if letter.nil? || letter.empty?  || letter !~ /[a-zA-Z]/
+    raise ArgumentError if letter == nil || letter.empty?  || letter !~ /^[a-zA-Z]$/
     letter = letter.downcase
     if @guesses.include?(letter) || @wrong_guesses.include?(letter)
 	 return false
@@ -24,6 +24,7 @@ class WordGuesserGame
     else
       @wrong_guesses += letter
     end
+    word_with_guesses()
     return true
   end
 
@@ -32,7 +33,7 @@ class WordGuesserGame
   end
 
   def check_win_or_lose
-    if word_with_guesses == @word
+    if @word_with_guesses == @word
 	    :win
     elsif @wrong_guesses.length >= 7
 	    :lose
