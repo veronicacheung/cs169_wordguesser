@@ -40,8 +40,7 @@ class WordGuesserApp < Sinatra::Base
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
-    if letter.nil? || letter.empty? || letter !~ /[a-zA-z]$/ || params[:guess].to_s.length > 1
-	    flash[:message] = "Invalid guess."
+    if  letter !~ /^[a-zA-z]$/ || letter == nil || letter == "" || params[:guess].to_s.length > 1
 	    redirect '/show'
     elsif @game.guesses.include?(letter.downcase) || @game.wrong_guesses.include?(letter.downcase)
 	    flash[:message] = "You have already used that letter."
