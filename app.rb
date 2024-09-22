@@ -61,12 +61,14 @@ class WordGuesserApp < Sinatra::Base
     ### YOUR CODE HERE ###
 	  @wrong_guesses = @game.wrong_guesses
 	  @word_with_guesses = @game.word_with_guesses
-	  if  @game.check_win_or_lose == :win
+	  check = @game.check_win_or_lose
+
+	  if  check  == :win
 		  redirect '/win'
-	  elsif @game.check_win_or_lose == :lose
+	  elsif check == :lose
 		  redirect '/lose'
 	  else
-    	       	  erb :show # You may change/remove this line
+    	        erb :show # You may change/remove this line
 	  end
   end
   get '/win' do
