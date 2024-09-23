@@ -40,16 +40,15 @@ class WordGuesserApp < Sinatra::Base
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
-    if  letter !~ /^[a-zA-z]$/ || letter == "" || letter == nil || params[:guess].to_s.length > 1
-	    flash[:message] = "Invalid guess."
-	    redirect '/show'
-	    
+    if letter.nil? || letter.empty? || letter !~ /^[a-zA-Z]$/
+      flash[:message] = "Invalid guess. Please enter a single letter."
+      redirect '/show'
     elsif @game.guesses.include?(letter.downcase) || @game.wrong_guesses.include?(letter.downcase)
-	    flash[:message] = "You have already used that letter."
-	    redirect '/show'
-    else 
-	    @game.guess(letter)
-	    redirect '/show'
+      flash[:message] = "You have already used that letter."
+      redirect '/show'
+    else
+      @game.guess(letter)
+      redirect '/show'
     end
   end
   
@@ -64,7 +63,7 @@ class WordGuesserApp < Sinatra::Base
 	  @word_with_guesses = @game.word_with_guesses
 	  check = @game.check_win_or_lose
 
-	  if  check  == :win
+	  if check == :win
 		  redirect '/win'
 	  elsif check == :lose
 		  redirect '/lose'
