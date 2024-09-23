@@ -41,7 +41,7 @@ class WordGuesserApp < Sinatra::Base
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
     if letter.nil? || letter.empty? || letter !~ /^[a-zA-Z]$/
-      flash[:message] = "Invalid guess. Please enter a single letter."
+      flash[:message] = "Invalid guess."
       redirect '/show'
     elsif @game.guesses.include?(letter.downcase) || @game.wrong_guesses.include?(letter.downcase)
       flash[:message] = "You have already used that letter."
